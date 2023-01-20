@@ -2,6 +2,7 @@ package com.example.jsouplistview;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -11,6 +12,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -26,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
     private ListView lv;
     private CustomAdapter customAdapter;
 
+    public FloatingActionButton fab;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +43,18 @@ public class MainActivity extends AppCompatActivity {
         ArrayAdapter<String> adapterMain = new ArrayAdapter<String>(this, R.layout.activity_listview_detail, R.id.headline_main, newsListMain);
 
         new NewThread().execute();
+
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new NewThread().execute();
+            }
+        });
+
+
 
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -57,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPreExecute(){
-            dialog.setMessage("Loading News...");
+            dialog.setMessage(getString(R.string.Loading_news));
             dialog.show();
 
         }

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">JsoupListview</string>
+    <string name="Loading_news">در حال بارگزاری اخبار …</string>
+
 </resources>
